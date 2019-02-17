@@ -1,37 +1,37 @@
-import {HttpClient} from "@angular/common/http";
-import {Subject} from "rxjs/index";
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from "@angular/core";
+import {ProductOrder} from "../models/product-order.model";
+import {ProductOrders} from "../models/product-orders.model";
+import {Subject} from "rxjs/index";
 
 @Injectable()
 export class EcommerceService {
-  private _productsUrl = "/api/products";
-  private _ordersUrl = "/api/orders";
+  private productsUrl = "/api/items";
+  private ordersUrl = "/api/orders";
 
-  private _productOrder: ProductOrder;
-  private _orders: ProductOrders = new ProductOrders();
+  private productOrder: ProductOrder;
+  private orders: ProductOrders = new ProductOrders();
 
-  private _productOrderSubject = new Subject();
-  private _ordersSubject = new Subject();
-  private _totalSubject = new Subject();
+  private productOrderSubject = new Subject();
+  private ordersSubject = new Subject();
+  private totalSubject = new Subject();
 
-  private _total: number;
+  private total: number;
 
-  private _ProductOrderChanged = this._productOrderSubject.asObservable();
-  private _OrdersChanged = this._ordersSubject.asObservable();
-  private _TotalChanged = this._totalSubject.asObservable();
+  ProductOrderChanged = this.productOrderSubject.asObservable();
+  OrdersChanged = this.ordersSubject.asObservable();
+  TotalChanged = this.totalSubject.asObservable();
 
   constructor(private http: HttpClient) {
   }
 
   getAllProducts() {
-    return this.http.get(this._productsUrl);
+    return this.http.get(this.productsUrl);
   }
 
   saveOrder(order: ProductOrders) {
-    return this.http.post(this._ordersUrl, order);
+    return this.http.post(this.ordersUrl, order);
   }
-
-  // getters and setters for shared fields
 
   set SelectedProductOrder(value: ProductOrder) {
     this.productOrder = value;

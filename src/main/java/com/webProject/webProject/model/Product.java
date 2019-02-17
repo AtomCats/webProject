@@ -4,29 +4,34 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Item {
+public class Product {
+    public Product() {
+    }
+
+    public Product(Long id, @NotNull(message = "Product name is required.") String name, @NotNull(message = "Product category is required.") String category, Double price, String pictureUrl, String url) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.pictureUrl = pictureUrl;
+        this.url = url;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Item name is required.")
+    @NotNull(message = "Product name is required.")
     @Basic(optional = false)
     private String name;
 
-    @NotNull(message = "Item category is required.")
+    @NotNull(message = "Product category is required.")
     @Basic(optional = false)
     private String category;
 
+    private Double price;
     private String pictureUrl;
     private String url;
-
-    public Item(@NotNull(message = "Item name is required.") String name, @NotNull(message = "Item category is required.") String category, String pictureUrl, String url) {
-        this.name = name;
-        this.category = category;
-        this.pictureUrl = pictureUrl;
-        this.url = url;
-    }
 
     public Long getId() {
         return id;
@@ -66,5 +71,13 @@ public class Item {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

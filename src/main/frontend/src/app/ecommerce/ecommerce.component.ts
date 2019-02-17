@@ -9,6 +9,13 @@ import {OrdersComponent} from "./orders/orders.component";
   styleUrls: ['./ecommerce.component.css']
 })
 export class EcommerceComponent implements OnInit {
+  ngOnInit(): void {
+  }
+
+
+  constructor() {
+  }
+
   private collapsed = true;
   orderFinished = false;
 
