@@ -5,6 +5,12 @@ import {Product} from "../models/product.model";
 import {ProductOrder} from "../models/product-order.model";
 import {ProductOrders} from "../models/product-orders.model";
 
+@Component({
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.css']
+})
+
 export class ProductsComponent implements OnInit {
   productOrders: ProductOrder[] = [];
   products: Product[] = [];

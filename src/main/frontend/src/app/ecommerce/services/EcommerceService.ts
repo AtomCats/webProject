@@ -4,7 +4,9 @@ import {ProductOrder} from "../models/product-order.model";
 import {ProductOrders} from "../models/product-orders.model";
 import {Subject} from "rxjs/index";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class EcommerceService {
   private productsUrl = "/api/items";
   private ordersUrl = "/api/orders";
