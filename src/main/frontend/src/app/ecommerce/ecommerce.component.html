@@ -1,31 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">Baeldung Ecommerce</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarResponsive" aria-controls="navbarResponsive"
-            aria-expanded="false" aria-label="Toggle navigation" (click)="toggleCollapsed()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="navbarResponsive" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#" (click)="reset()">Home
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="row">
-  <div class="col-md-9">
-    <app-products #productsC [hidden]="orderFinished"></app-products>
-  </div>
-  <div class="col-md-3">
-    <app-shopping-cart (onOrderFinished)=finishOrder($event) #shoppingCartC
-                       [hidden]="orderFinished"></app-shopping-cart>
-  </div>
-  <div class="col-md-6 offset-3">
-    <app-orders #ordersC [hidden]="!orderFinished"></app-orders>
-  </div>
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="true">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name">Responsive App</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container"
+                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list>
+        <button mat-button [matMenuTriggerFor]="furniture">Мебель</button>
+        <mat-menu #furniture="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="sofa">Диваны</button>
+          <button mat-menu-item [matMenuTriggerFor]="tables">Столы</button>
+          <button mat-menu-item [matMenuTriggerFor]="chairs">Стулья</button>
+        </mat-menu>
+<!--
+        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
+-->
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <p *ngFor="let content of fillerContent">{{content}}</p>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
+
+<div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
